@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_bg"
+        tools:context=".activity.LoginActivity">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <EditText
+            android:id="@+id/email_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/bg_text_field"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:gravity="left|center_vertical"
+            android:hint="@string/log_in_hint"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/color_cursor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+        <EditText
+            android:id="@+id/password_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_text_field"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:gravity="left|center_vertical"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textCursorDrawable="@drawable/color_cursor"
+            app:layout_constraintEnd_toEndOf="@+id/email_editText"
+            app:layout_constraintStart_toStartOf="@+id/email_editText"
+            app:layout_constraintTop_toBottomOf="@+id/email_editText" />
+
+        <Button
+            android:id="@+id/log_in_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_log_in"
+            android:text="@string/enter_btn"
+            android:textColor="@android:color/white"
+            android:textCursorDrawable="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/password_editText"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/password_editText"
+            app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/info_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:clickable="true"
+            android:text="@string/info"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/log_in_button"
+            app:layout_constraintStart_toStartOf="@+id/log_in_button"
+            app:layout_constraintTop_toBottomOf="@+id/log_in_button"
+            android:focusable="true" />
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
+
