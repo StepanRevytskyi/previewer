@@ -3,8 +3,8 @@ package com.arondillqs5328.moappspreviewer.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +15,13 @@ import com.arondillqs5328.moappspreviewer.R;
 import com.arondillqs5328.moappspreviewer.adapter.AppAdapter;
 import com.arondillqs5328.moappspreviewer.common.Common;
 import com.arondillqs5328.moappspreviewer.model.ApplicationListPesponse;
+import com.arondillqs5328.moappspreviewer.model.Datum;
 import com.arondillqs5328.moappspreviewer.model.UserApp;
 import com.arondillqs5328.moappspreviewer.retrofit.IApi;
 import com.arondillqs5328.moappspreviewer.retrofit.RetrofitClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,10 +36,9 @@ public class AppListActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     private SharedPreferences mPreferences;
     private IApi mApi;
+    private List<Datum> mData = new ArrayList<>();
 
     public static Intent newInstance(Context context) {
         Intent intent = new Intent(context, AppListActivity.class);
@@ -47,7 +50,6 @@ public class AppListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_list);
         ButterKnife.bind(this);
-
         setSupportActionBar(mToolbar);
 
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
@@ -55,12 +57,12 @@ public class AppListActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences(Common.APP_REFERENCES, MODE_PRIVATE);
 
-        loadUserAppList();
+        mAdapter = new AppAdapter(mData);
 
         mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(mAdapter);
+        loadUserAppList();
     }
 
     private void loadUserAppList() {
@@ -70,8 +72,8 @@ public class AppListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApplicationListPesponse> call, Response<ApplicationListPesponse> response) {
                 if (response.isSuccessful()) {
-                    mAdapter = new AppAdapter(response.body().getData());
-                    mRecyclerView.setAdapter(mAdapter);
+                    mData.addAll(response.body().getData());
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 
