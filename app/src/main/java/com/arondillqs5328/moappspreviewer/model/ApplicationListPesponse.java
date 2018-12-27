@@ -8,7 +8,7 @@ import java.util.List;
 public class ApplicationListPesponse {
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private List<Datum> data;
 
     public ApplicationListPesponse() {
 
